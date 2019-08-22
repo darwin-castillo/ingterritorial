@@ -1,0 +1,40 @@
+let ArrayTender;
+
+fetch('https://www.datos.gov.co/resource/c6dm-udt9.json')
+.then(function(response) {
+  return response.json();
+})
+.then(function(responseJson) {
+ // var objectURL = URL.createObjectURL(miBlob);
+ // alert("Today's date is " + d);
+ ArrayTender = responseJson.tenders;
+ console.log(responseJson.tenders);
+
+
+ var x = document.getElementById("loadtable");
+        x.style.display = "none";
+
+ Tenders = responseJson;
+console.log("Imprimiendo Tenders: ");
+ console.log(Tenders);
+
+
+ var table = document.getElementById("Jtabla");
+    
+for(var i=0; i<10; i++){
+    var row = table.insertRow(1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    var cell5 = row.insertCell(4);
+    cell1.innerHTML = Tenders[i].uid
+    cell2.innerHTML = Tenders[i].detalle_del_objeto_a_contratar
+
+     //cell3.innerHTML = Tenders[i].description;
+      //cell4.innerHTML = "$"+Tenders[i].value.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
+       //cell5.innerHTML = "01/01/18";
+   }
+});
+        let d = new Date();
+       

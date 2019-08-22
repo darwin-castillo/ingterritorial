@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+
+
+    <title>Ingenieria Territorial - NIT 900723712-3</title>
+    <script type="text/javascript" language="javascript" src="js/jquery/jquery-3.3.1.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery/1.10.19/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/modules/utils.js"></script>
+    <script type="text/javascript" language="javascript" src="js/modules/filters.js"></script>
+    <script type="text/javascript" language="javascript" src="js/datatableclass.js"></script>
+    <script type="text/javascript" language="javascript" src="js/responsejs.js"></script>
+   
+
+     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+ <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+ <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+ <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+ <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+ <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+ <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+ <script type="text/javascript" language="javascript" src="js/setdata.js"></script>
+
+    <!-- https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css -->
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/datatables/jquery.dataTables.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/material_icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+   <link  href="css/data_styles.css" rel="stylesheet" />
+</head>
+
+<body>
+
+
+<!-- The Modal -->
+<div id="infoModal" class="modale">
+
+    <!-- Modal content  -->
+    <div class="modale-content">
+        <div class="modale-header">
+            <span class="close">&times;</span>
+            <h2 id="title-modal">Modal Header</h2>
+        </div>
+        <div class="modale-body">
+            <div class="row">
+                <ul class="collection with-header">
+                    <li class="collection-header">Entidad: <b id="mEntity"></b></li>
+                    <li class="collection-item">Detalle: <b id="mDetail"></b></li>
+                    <li class="collection-item">Objeto a Contratar: <b id="mObjectContract"></b></li>
+                    <li class="collection-item">Cuant&iacutea de Contrato: <b id="mAmountContract"></b></li>
+                    <li class="collection-item">Cuant&iacutea de Proceso: <b id="mAmountTrade"></b></li>
+                    <li class="collection-item">Departamento: <b id="mState"></b></li>
+                </ul>
+
+
+            </div>
+            <a id="linkMore" target="_blank" href="#">Ver mas...</a>
+        </div>
+        <div class="modale-footer">
+            <p id="processType">Algo</p>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="modalHelp" class="modale">
+
+    <!-- Modal content  -->
+    <div class="modale-content">
+        <div class="modale-header">
+            <span class="close">&times;</span>
+            <img src="assets/images/logo.png" style="width: 300px">
+        </div>
+        <div class="modale-body">
+            <div class="row">
+                <h2>Ingeniería Territorial NIT 900723712-3</h2>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- end modal -->
+
+
+<!-- Nav: Begin -->
+
+
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container">
+        <img class="circle" src="assets/images/co.png">
+        <img src="assets/images/logo.png" style="width: 300px">
+        <a>NIT 900723712-3</a>
+
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#" id="btnHelp"><i class="material-icons">contact_mail</i></a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="sidenav">
+            <li><a href="#" id="btnHelp"><i class="material-icons">contact_mail</i></a></li>
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+
+    </div>
+</nav>
+
+<div class="sticky">
+    <div class="progress" id="divFetchProgress">
+        <div id="fetchProgress" class="determinate" style="width: 0%"></div>
+    </div>
+
+</div>
+
+<!-- Nav: End -->
+
+<!-- SideNav: Begin -->
+
+<!-- SideNav: End -->
+
+
+<div class="row">
+
+
+    <div class="input-field col s3">
+        <select multiple id="status_multiple">
+            <option value="" disabled>Escoje una o varias opciones:</option>
+              <option value="0">No Definido</option>
+            <option value="1">Borrador</option>
+            <option value="2">Convocado</option>
+            <option value="3">Adjudicado</option>
+            <option value="4">Celebrado</option>
+            <option value="5">Borrador Descartado</option>
+            <option value="6">Invitacion Abierta</option>
+            <option value="7">Terminado</option>
+            <option value="8">Terminado anormalmente despues de convocado</option>
+            <option value="9">Invitacion Cerrada</option>
+            <option value="10">Terminado sin liquidar</option>
+            <option value="11">Descartado</option>
+            <option value="12">Publicación para manifestaciones de interés</option>
+            <option value="13">Proceso Banca Multilateral Cerrado</option>
+            <option value="14">Proceso Banca Multilateral Abierto</option>
+            <option value="15">Lista Multiusos</option>
+            <option value="16">Lista Corta</option>
+            <option value="17">Finalizado el plazo para manifestaciones de interés</option>
+            <option value="18">Expresión de Interés</option>
+
+
+        </select>
+        <label>Estado: </label>
+    </div>
+
+    <div class="input-field col s3">
+        <i class="material-icons prefix">attach_money</i>
+        <input id="price_from" placeholder="Cuantia Desde" type="number">
+        <label for="price_from">Cuant&iacutea Desde</label>
+    </div>
+
+    <div class="input-field col s3">
+        <input id="price_to" placeholder="Cuantia Hasta" type="number">
+        <label for="price_to">Cuant&iacutea Hasta</label>
+    </div>
+
+
+    <div id="depart_div" class="col s2">
+        <label>Departamento</label>
+        <select id="depart" class="browser-default">
+            <option value="" disabled selected>Escoje una opcion</option>
+        </select>
+    </div>
+
+    <div class="input-field col s3">
+        <i class="material-icons prefix">business_center</i>
+        <input id="entity" placeholder="Entidad" type="text">
+        <label for="entity">Entidad</label>
+    </div>
+
+
+</div>
+<div class="row">
+
+    <div class="col s2 ">
+        <label>Fecha incio</label>
+        <input id="dateinit" name="dateinit" placeholder="Fecha" type="text" class="datepicker">
+
+    </div>
+
+
+    <div class="col s2  ">
+        <label>Fecha fin</label>
+        <input id="date_end" placeholder="Fecha" type="text" class="datepicker">
+    </div>
+
+    <div id="object_contract_div" class="col s3">
+        <label>Objeto a Contratar:</label>
+        <select id="object_contract" class="browser-default">
+            <option value="" disabled selected>Escoje una opci&oacuten:</option>
+        </select>
+    </div>
+
+    <div id="object_contract_div" class="col s3">
+        <label>Tipo de Proceso:</label>
+        <select id="type_process" class="browser-default">
+            <option value="" disabled selected>Escoje una opci&oacuten:</option>
+        </select>
+    </div>
+
+    <div id="anio_div" class="col s2">
+        <label>A&ntildeo:</label>
+        <select id="annio" multiple >
+            <option value=""  disabled>Escojer a&ntildeo</option>
+            <option value="2019">2019</option>
+            <option value="2018">2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+            <option value="2012">2012</option>
+            <option value="2011">2011</option>
+        </select>
+    </div>
+
+
+</div>
+<div class="row">
+    <div class="col s6">
+        <a style="width: 100%" onclick="loadParameters()" class="waves-effect waves-light btn">
+            <i class="material-icons right">filter_list</i>
+            Filtrar
+        </a>
+    </div>
+    <div class="col s6">
+        <a style="width: 100%" href="?filter=0&a=2019,2018" class="waves-effect waves-light btn">
+            <i class="material-icons right">do_not_disturb_on</i>
+            No Filtrar
+        </a>
+    </div>
+
+    <div class="col s2">
+
+    </div>
+
+
+</div>
+
+<!-- Page Layout here -->
+<div class="section">
+
+
+    <table class="highlight" id="Jtabla" cellpadding="0" cellspacing="0" border="0">
+
+        <thead>
+        <tr>
+
+            <th width="80" align="left">Ocid</th>
+            <th width="340" align="left">Objeto a Contratar</th>
+
+            <th width="800" align="left">Descripci&oacuten</th>
+            <th width="100" align="left">Cuant&iacutea</th>
+            <th align="left">Fecha</th>
+            <th width="80" align="center">Estado</th>
+            <th width="80" align="center">Link</th>
+        </tr>
+
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+        <tr>
+
+            <th width="180" align="left">Ocid</th>
+            <th width="360" align="left">Objeto a Contratar</th>
+
+            <th width="800" align="left">Descripci&oacuten</th>
+            <th align="left">Cuant&iacutea</th>
+            <th align="left">Fecha</th>
+            <th align="center">Estado</th>
+            <th width="80" align="center">Link</th>
+        </tr>
+        </tfoot>
+
+
+    </table>
+
+
+    <div class="progress" id="loadtable">
+        <div class="indeterminate"></div>
+    </div>
+</div>
+
+<script src="js/load.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
+
+</body>
+</html>
