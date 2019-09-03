@@ -424,7 +424,7 @@ function setArrayData(responseJson) {
                 $('#mAmountTrade').text("$" + addCommas(tender.cuantia_proceso) + (tender.moneda !== "No Definida" ? " Moneda: " + tender.moneda : ""));
                 $('#mState').text(tender.dpto_y_muni_contratista);
                 //  $('#linkMore').href(tender.ruta_proceso_en_secop_i);
-                $('#linkMore').attr("href", tender.ruta_proceso_en_secop_i);
+                $('#linkMore').attr("href", tender.ruta_proceso_en_secop_i.url);
                 $('#processType').text(tender.tipo_de_proceso);
 
 
