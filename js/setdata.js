@@ -300,7 +300,7 @@ function setArrayData(responseJson) {
         }
 
         //  +++++++++++++++++++++++++++ entidad
-        /*
+
               if (!vct_entidad.includes(val.nombre_de_la_entidad)) {
                   vct_entidad.push(val.nombre_de_la_entidad);
                   var option = document.createElement("option");
@@ -310,7 +310,7 @@ function setArrayData(responseJson) {
                   option.appendChild(t);
                   entity.appendChild(option);
               }
-        */
+
 
         //  +++++++++++++++++++++++++++ tipo proceso
 
@@ -469,7 +469,21 @@ function AddRows(auxTenders) {
                 option.appendChild(t);
                 type_process.appendChild(option);
             }
-     //   }
+
+
+        //  +++++++++++++++++++++++++++ entidad
+
+        if (!vct_entidad.includes(val.nombre_de_la_entidad)) {
+            vct_entidad.push(val.nombre_de_la_entidad);
+            var option = document.createElement("option");
+            var valueOpt = (vct_entidad.length - 1);
+            option.setAttribute("value", val.nombre_de_la_entidad);
+            var t = document.createTextNode(val.nombre_de_la_entidad);
+            option.appendChild(t);
+            entity.appendChild(option);
+        }
+
+        //   }
 
     }
 

@@ -117,9 +117,16 @@ if (findGetParameter('obj') !== null) {
     });
 
   }
+/*
+    if (findGetParameter('ent') === null) {
+        console.log("implementando filtro entidad...");
+        arrayParam = $.grep(arrayParam, function (v) {
+            return v.objeto_a_contratar===vct_objecto_a_contratar[parseInt(findGetParameter('obj'))];
+        })
+  }
+*/
 
-
-if (findGetParameter('tp') !== null) {
+    if (findGetParameter('tp') !== null) {
     console.log("implementando filtro tipo proceso...");
     arrayParam = $.grep(arrayParam, function (v) {
     // console.log(v.tipo_de_proceso," = ",vct_objecto_a_contratar[parseInt(findGetParameter('obj'))]);
