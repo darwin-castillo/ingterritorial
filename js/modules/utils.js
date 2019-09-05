@@ -67,9 +67,13 @@ function loadParameters(){
 
     if(document.getElementById('entity').value!==null && document.getElementById('entity').value!==''){
         var concat_param = flag?"&":"";
+        console.log('ENTIDAD FILTRADA ',document.getElementById('entity').value);
         var valent = "ent="+document.getElementById('entity').value;
         valent = valent.replace(' ','%20');
-        console.log('valent ',valent);
+        valent = document.getElementById('entity').value;
+        valent = encodeURIComponent(valent);
+        valent = "ent="+valent;
+        console.log('value entity',valent);
         params+=concat_param+valent;
         flag_dinit = true;
         flag = true;
@@ -82,7 +86,10 @@ if(document.getElementById('annio').value!==null && document.getElementById('ann
        flag_dinit = true;
        flag = true;
     }
-**/
+
+ https://www.datos.gov.co/resource/c6dm-udt9.json?anno_cargue_secop=2019&$$app_token=D63kPsTjiMT7DCho4wbwp615A&$limit=1000&$offset=999&$where=nombre_de_la_entidad%20like%27%25ATL%C3%81NTICO%20-%20ALCALD%C3%8DA%20MUNICIPIO%20DE%20TUBARA%25%27
+ https://www.datos.gov.co/resource/c6dm-udt9.json?anno_cargue_secop=2019&$$app_token=D63kPsTjiMT7DCho4wbwp615A&$limit=10000&$offset=0&$where=nombre_de_la_entidad%20like%20%27%25ATL%C3%81NTICO%20-%20ALCALD%C3%8DA%20MUNICIPIO%20DE%20TUBARA%25%27
+ **/
      var conc = flag?"&":"";   
      params+=conc+"filter=1";
      flag=true;
@@ -124,16 +131,22 @@ function insertParam(key, value)
     //this will reload the page, it's likely better to store this until finished
     document.location.search = kvp.join('&'); 
 }
-
+//ent=ATL%C1NTICO%20-%20ALCALD%CDA%20MUNICIPIO%20DE%20TUBARA&filter=1&a=2019,2018
 function findGetParameter(parameterName) {
     var result = null,
         tmp = [];
+
     location.search
         .substr(1)
         .split("&")
         .forEach(function (item) {
           tmp = item.split("=");
-          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+          if (tmp[0] === parameterName) {
+
+           //   var uri_encoded = tmp[1].replace(/%([^\d].)/, "%25$1");
+              result = decodeURIComponent(tmp[1]);
+
+          }
         });
     return result;
 }

@@ -1,4 +1,6 @@
 function applyFilters(arrayParam) {
+
+    console.log("apply filters")
 /*
   Tenders = $.grep(Tenders, function (v) {
     return (v.estado_del_proceso !== 'Liquidado'
@@ -117,14 +119,15 @@ if (findGetParameter('obj') !== null) {
     });
 
   }
-/*
-    if (findGetParameter('ent') === null) {
+
+    if (findGetParameter('ent') !== null) {
         console.log("implementando filtro entidad...");
         arrayParam = $.grep(arrayParam, function (v) {
-            return v.objeto_a_contratar===vct_objecto_a_contratar[parseInt(findGetParameter('obj'))];
+
+            return v.nombre_de_la_entidad===vct_entidad[parseInt(findGetParameter('ent'))];
         })
   }
-*/
+
 
     if (findGetParameter('tp') !== null) {
     console.log("implementando filtro tipo proceso...");

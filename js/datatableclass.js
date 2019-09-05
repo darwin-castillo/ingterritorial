@@ -32,7 +32,8 @@ function setDatatable(dataSet, Tenders) {
                     {title: "Cuant&iacutea"},
                     {title: "Fecha"},
                     {title: "Estado"},
-                    {title: "Link"}
+                    {title: "Link"},
+                    {title: "Nombre de la Entidad"}
 
 
                 ],
@@ -50,7 +51,8 @@ function setDatatable(dataSet, Tenders) {
 
                 "columnDefs": [
                     {"type": "date-uk", targets: 4},
-                    {targets: 6, visible: false}
+                    {targets: 6, visible: false},
+                    {targets: 7, visible: false}
                 ],
 
                 language: {
@@ -78,7 +80,7 @@ function setDatatable(dataSet, Tenders) {
             }
         ).column( 0 )
             .data()
-            .unique();;
+            .unique();
 
 
         $('#Jtabla tbody').on('click', 'tr', function () {
@@ -110,7 +112,8 @@ function setDatatable(dataSet, Tenders) {
                 $('#linkMore').attr("href", tender.ruta_proceso_en_secop_i.url);
                 $('#processType').text(tender.tipo_de_proceso);
 
-                console.log("tenderrrrrrrrrrrr: ", tender.ruta_proceso_en_secop_i.url);
+
+
 
             }
         );
@@ -169,7 +172,8 @@ function addRowDatatable(val) {
             addCommas(val.cuantia_proceso) + " $",
             val.fecha_de_cargue_en_el_secop != null ? formatDate(val.fecha_de_cargue_en_el_secop, 0) : "",
             val.estado_del_proceso,
-            '<a href="' + val.ruta_proceso_en_secop_i.url + '">' + val.ruta_proceso_en_secop_i.url + '</a>'
+            '<a href="' + val.ruta_proceso_en_secop_i.url + '">' + val.ruta_proceso_en_secop_i.url + '</a>',
+            val.nombre_de_la_entidad
 
 
         ]).draw(false);

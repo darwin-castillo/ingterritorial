@@ -89,15 +89,19 @@ window.onload = function () {
     var annio = findGetParameter('a');
     var entidad = findGetParameter('ent');
 
+
+    console.log("Entidad seleccionada", entidad);
+
     document.getElementById("dateinit").value = din !== null ? epochToDate(din) : "";
     document.getElementById("date_end").value = dend !== null ? epochToDate(dend) : "";
     document.getElementById("price_from").value = pfrom !== null ? pfrom : "";
     document.getElementById("price_to").value = pto !== null ? pto : "";
     document.getElementById("depart").value = dep !== null ? dep : "";
-    document.getElementById("entity").value = entidad !== null ? entidad : "";
+  //  document.getElementById("entity").value = entidad !== null ? entidad : -1;
     document.getElementById("annio").value = annio !== null ? annio : "" + current_year.toString() + "," + (current_year - 1).toString();
     document.getElementById("object_contract").value = obj !== null ? obj : "";
 
+   // document.getElementById("entity").setAttribute("selected",entidad);
 
     // document.getElementById("status_multiple").value = status!==null?status:"";
     if (findGetParameter('ent') !== null) {
@@ -156,17 +160,19 @@ window.onload = function () {
     var entidada = findGetParameter('ent');
     if (entidada !== null)
         entidada = entidada.replace(' ', '%20');
+
+
+    console.log("MI ENTIDAD ", entidada);
     var url1 = 'https://www.datos.gov.co/resource/c6dm-udt9.json?'
         + 'anno_cargue_secop=' + annio.split(",")[0]
         //+'&id_tipo_de_proceso=1'
         + '&$$app_token=D63kPsTjiMT7DCho4wbwp615A'
         + '&$limit=10000'
-        + '&$offset=0'
-        + ((entidada !== null && entidada !== '') ? '&$where=nombre_de_la_entidad%20like%20%27%25' + entidada + '%25%27' : '');
+        + '&$offset=0';
     var url2 = 'http://localhost/SampleWS/';
 
 
-    console.log("" + url1);
+    console.log("url inicial " + url1);
     console.log("Fecha: " + getToday());
 //var url2 = 'https://www.datos.gov.co/resource/c6dm-udt9.json';
     localStorage.clear();
@@ -233,6 +239,8 @@ function fetchingData(url1) {
 function requestListener() {
     var data = JSON.parse(this.responseText);
     console.log("flagSetArray ======> ", flagSetArray);
+    console.log("this.responseText ", this.responseText);
+
     if (!flagSetArray)
         setArrayData(data);
     else
@@ -301,15 +309,15 @@ function setArrayData(responseJson) {
 
         //  +++++++++++++++++++++++++++ entidad
 
-              if (!vct_entidad.includes(val.nombre_de_la_entidad)) {
-                  vct_entidad.push(val.nombre_de_la_entidad);
-                  var option = document.createElement("option");
-                  var valueOpt = (vct_entidad.length - 1);
-                  option.setAttribute("value", val.nombre_de_la_entidad);
-                  var t = document.createTextNode(val.nombre_de_la_entidad);
-                  option.appendChild(t);
-                  entity.appendChild(option);
-              }
+        if (!vct_entidad.includes(val.nombre_de_la_entidad)) {
+            vct_entidad.push(val.nombre_de_la_entidad);
+            var option = document.createElement("option");
+            var valueOpt = (vct_entidad.length - 1);
+            option.setAttribute("value", valueOpt);
+            var t = document.createTextNode(val.nombre_de_la_entidad);
+            option.appendChild(t);
+            entity.appendChild(option);
+        }
 
 
         //  +++++++++++++++++++++++++++ tipo proceso
@@ -336,10 +344,6 @@ function setArrayData(responseJson) {
     });
 
 
-    var str = 'Servicios de Viajes, Alimentaci/ó/n, Alojamiento y Entretenimiento'
-    console.log(str);
-
-
     /** +++++++++++++++          TENDER = ?       ++++++++++++++**/
 
     Tenders = applyFilters(Tenders);
@@ -354,10 +358,13 @@ function setArrayData(responseJson) {
             addCommas(val.cuantia_proceso) + " $",
             val.fecha_de_cargue_en_el_secop != null ? formatDate(val.fecha_de_cargue_en_el_secop, 0) : "",
             val.estado_del_proceso,
-            '<a href="' + val.ruta_proceso_en_secop_i.url + '">' + val.ruta_proceso_en_secop_i.url + '</a>'
+            '<a href="' + val.ruta_proceso_en_secop_i.url + '">' + val.ruta_proceso_en_secop_i.url + '</a>',
+            val.nombre_de_la_entidad
         ]);
 
     });
+
+
     data_obj = dataSet;
 
     /**
@@ -366,6 +373,14 @@ function setArrayData(responseJson) {
 ////dataSet=[];
 //localStorage.setItem("dt",JSON.stringify(Tenders))
     flagSetArray = true;
+
+    /**todo: asignar al select entidad***/
+    var entidad = findGetParameter('ent');
+  if(entidad!==null) {
+      document.getElementById("entity").setAttribute("selected", entidad);
+      document.getElementById("entity").value = entidad;
+  }
+
     setDatatable(dataSet, Tenders);
     multipleFetchApi();
 
@@ -386,16 +401,11 @@ function multipleFetchApi() {
     var vct_annio_fetch = annio.split(",");
     var values = [];
     for (var i = 0; i < vct_annio_fetch.length; i++) {
-        var entidada = findGetParameter('ent');
-        if (entidada !== null)
-            entidada = entidada.replace(' ', '%20');
 
-        values.push(baseUrl + "&$offset=0&anno_cargue_secop=" + vct_annio_fetch[i]
-            + ((entidada !== null && entidada !== '') ? '&$where=nombre_de_la_entidad%20like%20%27%25' + entidada + '%25%27' : ''));
+        values.push(baseUrl + "&$offset=0&anno_cargue_secop=" + vct_annio_fetch[i]);
 
         for (var j = 0; j <= 9; j++) {
-            var endpoint = baseUrl + "&$offset=" + ((j > 0) ? j.toString() : "") + "999&anno_cargue_secop=" + vct_annio_fetch[i]
-                + ((entidada !== null && entidada !== '') ? '&$where=nombre_de_la_entidad%20like%20%27%25' + entidada + '%25%27' : '');
+            var endpoint = baseUrl + "&$offset=" + ((j > 0) ? j.toString() : "") + "999&anno_cargue_secop=" + vct_annio_fetch[i];
             values.push(endpoint);
             console.log("ENDOPOINT ", endpoint);
         }
@@ -421,15 +431,24 @@ function AddRows(auxTenders) {
     var object_contract = document.getElementById("object_contract");
     var type_process = document.getElementById("type_process");
 
+
+    /**todo: asignar al select entidad***/
+    var entidad = findGetParameter('ent');
+   if(entidad!==null) {
+       document.getElementById("entity").setAttribute("selected", entidad);
+       document.getElementById("entity").value = entidad;
+   }
+
     for (var i = 0; i < auxTenders.length; i++) {
 
         // addRowDatatable(auxTenders[i]);
 
 
         var val = auxTenders[i];
-     /*   if (Tenders.find(function (value) {
-                value.uid === val.uid
-            })) {*/
+        var result =Tenders.find(function (value) {
+           return value.uid === val.uid
+        });
+        if (!result) {
             addRowDatatable(val);
             Tenders.push(auxTenders[i]);
 
@@ -471,19 +490,19 @@ function AddRows(auxTenders) {
             }
 
 
-        //  +++++++++++++++++++++++++++ entidad
+            //  +++++++++++++++++++++++++++ entidad
 
-        if (!vct_entidad.includes(val.nombre_de_la_entidad)) {
-            vct_entidad.push(val.nombre_de_la_entidad);
-            var option = document.createElement("option");
-            var valueOpt = (vct_entidad.length - 1);
-            option.setAttribute("value", val.nombre_de_la_entidad);
-            var t = document.createTextNode(val.nombre_de_la_entidad);
-            option.appendChild(t);
-            entity.appendChild(option);
+            if (!vct_entidad.includes(val.nombre_de_la_entidad)) {
+                vct_entidad.push(val.nombre_de_la_entidad);
+                var option = document.createElement("option");
+                var valueOpt = (vct_entidad.length - 1);
+                option.setAttribute("value", valueOpt);
+                var t = document.createTextNode(val.nombre_de_la_entidad);
+                option.appendChild(t);
+                entity.appendChild(option);
+            }
+
         }
-
-        //   }
 
     }
 
