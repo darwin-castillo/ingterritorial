@@ -7,8 +7,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 
-
-
     <title>Ingenieria Territorial - NIT 900723712-3</title>
     <script type="text/javascript" language="javascript" src="js/jquery/jquery-3.3.1.js"></script>
     <script type="text/javascript" language="javascript" src="js/jquery/1.10.19/jquery.dataTables.min.js"></script>
@@ -16,16 +14,23 @@
     <script type="text/javascript" language="javascript" src="js/modules/filters.js"></script>
     <script type="text/javascript" language="javascript" src="js/datatableclass.js"></script>
     <script type="text/javascript" language="javascript" src="js/responsejs.js"></script>
-   
 
-     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
- <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
- <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
- <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
- <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
- <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
- <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
- <script type="text/javascript" language="javascript" src="js/setdata.js"></script>
+
+    <script type="text/javascript" language="javascript"
+            src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript"
+            src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" language="javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" language="javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" language="javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" language="javascript"
+            src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" language="javascript"
+            src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/setdata.js"></script>
 
     <!-- https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css -->
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -33,7 +38,7 @@
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="css/material_icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-   <link  href="css/data_styles.css" rel="stylesheet" />
+    <link href="css/data_styles.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -135,7 +140,7 @@
     <div class="input-field col s3">
         <select multiple id="status_multiple">
             <option value="" disabled>Escoje una o varias opciones:</option>
-              <option value="0">No Definido</option>
+            <option value="0">No Definido</option>
             <option value="1">Borrador</option>
             <option value="2">Convocado</option>
             <option value="3">Adjudicado</option>
@@ -184,11 +189,13 @@
         <select id="entity" class="browser-default">
             <option value="" disabled selected>Escoje una opci&oacuten:</option>
         </select>
-      <!--
-        <i class="material-icons prefix">business_center</i>
-        <input id="entity" placeholder="Entidad" type="text">
-        <label for="entity">Entidad</label>
-        -->
+
+
+        <!--
+          <i class="material-icons prefix">business_center</i>
+          <input id="entity" placeholder="Entidad" type="text">
+          <label for="entity">Entidad</label>
+          -->
 
     </div>
 
@@ -208,118 +215,124 @@
         <input id="date_end" placeholder="Fecha" type="text" class="datepicker">
     </div>
 
-    <div id="object_contract_div" class="col s3">
+    <div id="object_contract_div" class="col s2">
         <label>Objeto a Contratar:</label>
         <select id="object_contract" class="browser-default">
             <option value="" disabled selected>Escoje una opci&oacuten:</option>
         </select>
     </div>
 
-    <div id="object_contract_div" class="col s3">
+    <div id="object_contract_div" class="col s2">
         <label>Tipo de Proceso:</label>
         <select id="type_process" class="browser-default">
             <option value="" disabled selected>Escoje una opci&oacuten:</option>
         </select>
     </div>
 
-    
 
-     <div id="anio_div"    class="input-field col s2">
+    <div id="anio_div" class="input-field col s2">
         <i class="material-icons prefix">date_range</i>
-           <input id="annio" placeholder="Año" type="text">
-<label for="annio">Año</label>
-     
-        
+        <input id="annio" placeholder="Año" type="text">
+        <label for="annio">Año</label>
+
+    </div>
+
+
+    <div id="past_date_div" class="input-field col s2">
+        <label>
+            <input type="checkbox" class="filled-in"   id="past" name="past"/>
+            <span>Procesos Actualizados</span>
+        </label>
+    </div>
+
+    <!--
+        <div id="anio_div" class="col s2">
+            <label>A&ntildeo:</label>
+            <select id="annio" multiple >
+                <option value=""  disabled>Escojer a&ntildeo</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+                <option value="2014">2014</option>
+                <option value="2013">2013</option>
+                <option value="2012">2012</option>
+                <option value="2011">2011</option>
+            </select>
+        </div>
+    -->
+
+
+    <div class="row">
+        <div class="col s6">
+            <a style="width: 100%" onclick="loadParameters()" class="waves-effect waves-light btn">
+                <i class="material-icons right">filter_list</i>
+                Filtrar
+            </a>
+        </div>
+        <div class="col s6">
+            <a style="width: 100%" href="?filter=0&a=2019,2018" class="waves-effect waves-light btn">
+                <i class="material-icons right">do_not_disturb_on</i>
+                No Filtrar
+            </a>
         </div>
 
-<!--
-    <div id="anio_div" class="col s2">
-        <label>A&ntildeo:</label>
-        <select id="annio" multiple >
-            <option value=""  disabled>Escojer a&ntildeo</option>
-            <option value="2019">2019</option>
-            <option value="2018">2018</option>
-            <option value="2017">2017</option>
-            <option value="2016">2016</option>
-            <option value="2015">2015</option>
-            <option value="2014">2014</option>
-            <option value="2013">2013</option>
-            <option value="2012">2012</option>
-            <option value="2011">2011</option>
-        </select>
-    </div>
--->
+        <div class="col s2">
 
+        </div>
 
-<div class="row">
-    <div class="col s6">
-        <a style="width: 100%" onclick="loadParameters()" class="waves-effect waves-light btn">
-            <i class="material-icons right">filter_list</i>
-            Filtrar
-        </a>
-    </div>
-    <div class="col s6">
-        <a style="width: 100%" href="?filter=0&a=2019,2018" class="waves-effect waves-light btn">
-            <i class="material-icons right">do_not_disturb_on</i>
-            No Filtrar
-        </a>
-    </div>
-
-    <div class="col s2">
 
     </div>
 
-
-</div>
-
-<!-- Page Layout here -->
-<div class="section">
+    <!-- Page Layout here -->
+    <div class="section">
 
 
-    <table class="highlight" id="Jtabla" cellpadding="0" cellspacing="0" border="0">
+        <table class="highlight" id="Jtabla" cellpadding="0" cellspacing="0" border="0">
 
-        <thead>
-        <tr>
+            <thead>
+            <tr>
 
-            <th width="80" align="left">Ocid</th>
-            <th width="340" align="left">Objeto a Contratar</th>
+                <th width="80" align="left">Ocid</th>
+                <th width="340" align="left">Objeto a Contratar</th>
 
-            <th width="800" align="left">Descripci&oacuten</th>
-            <th width="100" align="left">Cuant&iacutea</th>
-            <th align="left">Fecha</th>
-            <th width="80" align="center">Estado</th>
-            <th width="80" align="center">Link</th>
-        </tr>
+                <th width="800" align="left">Descripci&oacuten</th>
+                <th width="100" align="left">Cuant&iacutea</th>
+                <th align="left">Fecha</th>
+                <th width="80" align="center">Estado</th>
+                <th width="80" align="center">Link</th>
+            </tr>
 
-        </thead>
-        <tbody>
-        </tbody>
-        <tfoot>
-        <tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+            <tr>
 
-            <th width="180" align="left">Ocid</th>
-            <th width="360" align="left">Objeto a Contratar</th>
+                <th width="180" align="left">Ocid</th>
+                <th width="360" align="left">Objeto a Contratar</th>
 
-            <th width="800" align="left">Descripci&oacuten</th>
-            <th align="left">Cuant&iacutea</th>
-            <th align="left">Fecha</th>
-            <th align="center">Estado</th>
-            <th width="80" align="center">Link</th>
-        </tr>
-        </tfoot>
-
-
-    </table>
+                <th width="800" align="left">Descripci&oacuten</th>
+                <th align="left">Cuant&iacutea</th>
+                <th align="left">Fecha</th>
+                <th align="center">Estado</th>
+                <th width="80" align="center">Link</th>
+            </tr>
+            </tfoot>
 
 
-    <div class="progress" id="loadtable">
-        <div class="indeterminate"></div>
+        </table>
+
+
+        <div class="progress" id="loadtable">
+            <div class="indeterminate"></div>
+        </div>
     </div>
-</div>
 
-<script src="js/load.js"></script>
-<script src="js/materialize.js"></script>
-<script src="js/init.js"></script>
+    <script src="js/load.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
 
 </body>
 </html>
